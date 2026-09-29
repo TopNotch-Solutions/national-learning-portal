@@ -1,0 +1,159 @@
+:root {
+  --bg: #0b1c33;
+  --bg-accent: #14325a;
+  --surface: #ffffff;
+  --ink: #14233a;
+  --muted: #66758b;
+  --accent: #1f4f8a;
+  --accent-soft: #e8f0fa;
+  --accent-strong: #163a66;
+  --highlight: #e08a2c;
+  --line: rgba(20, 35, 58, 0.1);
+  --ok: #1f7a4d;
+  --bad: #a33a2c;
+  --font-display: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+  color: #eef3f9;
+}
+
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #9ec0e8;
+}
+
+.logout-button {
+  appearance: none;
+  border: 1px solid rgba(238, 243, 249, 0.35);
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  font-weight: 600;
+  color: #eef3f9;
+  background: transparent;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: rgba(238, 243, 249, 0.08);
+}
+
+.header h1 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+}
+
+.lede {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(238, 243, 249, 0.82);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.main {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.panel {
+  background: var(--surface);
+  padding: 1.5rem 1.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.panel h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.status {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.status div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.5rem;
+}
+
+.status dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.status dd {
+  margin: 0;
+}
+
+.ok {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.bad,
+.error {
+  color: var(--bad);
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+code {
+  font-size: 0.9em;
+  background: var(--accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+@media (min-width: 720px) {
+  .main {
+    grid-template-columns: 1fr 1.4fr;
+    align-items: start;
+  }
+}

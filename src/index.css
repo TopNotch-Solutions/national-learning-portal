@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap");
+
+:root {
+  --bg: #0b1c33;
+  --bg-accent: #14325a;
+  --surface: #ffffff;
+  --ink: #14233a;
+  --muted: #66758b;
+  --accent: #1f4f8a;
+  --accent-soft: #e8f0fa;
+  --accent-strong: #163a66;
+  --highlight: #e08a2c;
+  --line: rgba(20, 35, 58, 0.1);
+  --ok: #1f7a4d;
+  --bad: #a33a2c;
+  --font-display: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: #f4f6f9;
+}
+
+#root {
+  min-height: 100vh;
+}

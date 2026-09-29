@@ -1,0 +1,93 @@
+.teacher-form-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.teacher-form-card {
+  padding: 1.15rem 1.2rem 1.35rem;
+}
+
+.teacher-form-card-head {
+  margin-bottom: 1rem;
+}
+
+.teacher-form-card-head h2 {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.teacher-recent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.teacher-recent-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #f8fafc;
+  min-width: 0;
+}
+
+.teacher-recent-list li > :first-child {
+  min-width: 0;
+}
+
+.td-stat-value-text {
+  font-size: clamp(1rem, 2vw, 1.25rem) !important;
+  line-height: 1.25 !important;
+}
+
+.exam-filter-row {
+  justify-content: space-between;
+}
+
+.exam-list-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .teacher-form-card {
+    padding: 1rem 0.95rem 1.15rem;
+  }
+
+  .teacher-recent-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .exam-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .exam-list-head .td-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 900px) {
+  .teacher-form-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1100px) {
+  .td-dash-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
