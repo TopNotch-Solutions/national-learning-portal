@@ -279,7 +279,7 @@ export default function ManageTeachersPage() {
     return staff.filter((person) => {
       const num = gradeNumber(person.grade);
       if (selectedPhase && selectedPhase.id !== 'all' && 'grades' in selectedPhase) {
-        if (!num || !selectedPhase.grades.includes(num)) return false;
+        if (!num || !selectedPhase.grades.some((g) => g === num)) return false;
       }
 
       if (subjectChip !== 'All Subjects' && person.subject !== subjectChip) {
