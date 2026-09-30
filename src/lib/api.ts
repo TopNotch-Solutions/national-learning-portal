@@ -54,9 +54,9 @@ export function homePathForRole(role: PortalUser['role']) {
 }
 
 async function parseResponse<T>(res: Response): Promise<T> {
-  const data = (await res.json().catch(() => ({}))) as T & { message?: string };
+  const data = (await res.json().catch(() => ({}))) as T & { message?: string; error?: string };
   if (!res.ok) {
-    throw new Error(data.message || 'Request failed');
+    throw new Error(data.message || data.error || 'Request failed');
   }
   return data;
 }
@@ -71,56 +71,88 @@ function authHeaders(auth: boolean, withJson = false): Record<string, string> {
   return headers;
 }
 
-export async function apiPost<T>(path: string, body: unknown, auth = false): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    method: 'POST',
-    headers: authHeaders(auth, true),
-    body: JSON.stringify(body),
-  });
+function assertApiBase() {
+  if (!API_BASE) {
+    throw new Error(
+      'Portal API URL is not configured. Set VITE_API_URL in portal/.env (e.g. http://localhost:5000) and restart Vite.'
+    );
+  }
+}
 
-  return parseResponse<T>(res);
+async function withNetworkError<T>(run: () => Promise<T>): Promise<T> {
+  try {
+    return await run();
+  } catch (err) {
+    if (err instanceof TypeError && /fetch/i.test(err.message)) {
+      throw new Error(
+        `Cannot reach API at ${API_BASE || '(missing VITE_API_URL)'}. Is the backend running?`
+      );
+    }
+    throw err;
+  }
+}
+
+export async function apiPost<T>(path: string, body: unknown, auth = false): Promise<T> {
+  assertApiBase();
+  return withNetworkError(async () => {
+    const res = await fetch(`${API_BASE}${path}`, {
+      method: 'POST',
+      headers: authHeaders(auth, true),
+      body: JSON.stringify(body),
+    });
+    return parseResponse<T>(res);
+  });
 }
 
 export async function apiPut<T>(path: string, body: unknown, auth = true): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    method: 'PUT',
-    headers: authHeaders(auth, true),
-    body: JSON.stringify(body),
+  assertApiBase();
+  return withNetworkError(async () => {
+    const res = await fetch(`${API_BASE}${path}`, {
+      method: 'PUT',
+      headers: authHeaders(auth, true),
+      body: JSON.stringify(body),
+    });
+    return parseResponse<T>(res);
   });
-
-  return parseResponse<T>(res);
 }
 
 export async function apiDelete<T>(path: string, auth = true): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    method: 'DELETE',
-    headers: authHeaders(auth),
+  assertApiBase();
+  return withNetworkError(async () => {
+    const res = await fetch(`${API_BASE}${path}`, {
+      method: 'DELETE',
+      headers: authHeaders(auth),
+    });
+    return parseResponse<T>(res);
   });
-
-  return parseResponse<T>(res);
 }
 
 export async function apiUpload<T>(path: string, formData: FormData, auth = true): Promise<T> {
-  const headers: Record<string, string> = {};
-  if (auth) {
-    const token = getToken();
-    if (token) headers.Authorization = `Bearer ${token}`;
-  }
+  assertApiBase();
+  return withNetworkError(async () => {
+    const headers: Record<string, string> = {};
+    if (auth) {
+      const token = getToken();
+      if (token) headers.Authorization = `Bearer ${token}`;
+    }
 
-  const res = await fetch(`${API_BASE}${path}`, {
-    method: 'POST',
-    headers,
-    body: formData,
+    const res = await fetch(`${API_BASE}${path}`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+    return parseResponse<T>(res);
   });
-
-  return parseResponse<T>(res);
 }
 
 export async function apiGet<T>(path: string, auth = true): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: authHeaders(auth),
+  assertApiBase();
+  return withNetworkError(async () => {
+    const res = await fetch(`${API_BASE}${path}`, {
+      headers: authHeaders(auth),
+    });
+    return parseResponse<T>(res);
   });
-  return parseResponse<T>(res);
 }
 
 export function fileUrl(pathOrUrl: string | null | undefined) {

@@ -76,6 +76,20 @@ function NavIcon({ path }: { path: string }) {
       </svg>
     );
   }
+  if (path.includes('/explore')) {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M12 21s-7-4.8-7-11a7 7 0 1 1 14 0c0 6.2-7 11-7 11Z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+        <circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      </svg>
+    );
+  }
   if (path.includes('/exams')) {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">

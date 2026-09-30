@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import { ManageAdminsPage, ManageTeachersPage } from './pages/admin/AdminPages';
+import ManageExplorePage from './pages/admin/ManageExplorePage';
 import TeacherLayout from './pages/teacher/TeacherLayout';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import AddContentPage from './pages/teacher/AddContentPage';
@@ -39,6 +40,7 @@ export default function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="admins" element={<ManageAdminsPage />} />
             <Route path="teachers" element={<ManageTeachersPage />} />
+            <Route path="explore" element={<ManageExplorePage />} />
           </Route>
         </Route>
 
